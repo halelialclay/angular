@@ -1,0 +1,53 @@
+<h1 class="mb-0">רשימת כתובות </h1>
+<br/>
+<div class="row" style="margin-bottom: 10px;">
+  <div class="col col-9">
+    <p-dropdown [options]="sett" [style]="{'minWidth':'100%'}" [(ngModel)]="selectedsett" (onChange)=getAddressList() [virtualScroll]="true" [itemSize]="31" [filter]="true"  optionLabel="name" placeholder="שם ישוב"></p-dropdown>    
+  </div>
+  <div class="col col-3">
+    <button class="btn btn-dark btn-lg w-100" (click)="openNew()"><i class="pi pi-plus"></i>הוספת כתובת</button>
+  </div>
+</div>
+
+<div class="card">
+        <p-table  [value]="addresses">
+        <ng-template pTemplate="header" >
+            <tr>
+                <th>כתובת</th>
+            </tr>
+      </ng-template>
+         <ng-template pTemplate="body" let-address>
+                <tr>
+                  <td>
+                    <button (click)="deleteAdd(address)"  pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger" style="border-bottom: rgb(255, 196, 196); ; background-color: rgb(255, 196, 196);"></button>
+                    {{address.address}}
+                  </td>
+                  
+                   
+                </tr>
+                
+                 
+                
+          </ng-template>
+        </p-table>
+    
+
+</div>
+
+<p-dialog header="הוסף כתובת" [(visible)]="newAdd" >
+
+    <div class="row">
+        <div class="input-group mb-3">
+          <input type="text" name="location" class="form-control" placeholder="Insert Location - street, country" [(ngModel)]="searchQuery" />
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="searchLocation()"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="searchResults">
+        <div *ngFor="let res of searchResults">
+          {{res.name}}&nbsp;<button type="button" (click)="saveAddress(res)"><i class="fa fa-check"></i></button><br />
+        </div>
+      </div>
+</p-dialog>
+

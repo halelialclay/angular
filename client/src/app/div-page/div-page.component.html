@@ -1,0 +1,126 @@
+
+<div class="row">
+    <div class="col">
+    <h1 class="mb-0">עמוד ראשי </h1>
+</div>
+<div class="col-end">
+   <button type="button"  style="color:#000000; border-color: black;"  class=" btn-lg btn mb-1 btn-rounded " (click)="visible= true"> צא'ט <i class="fas fa fa-comments fa-lg"></i></button>
+   </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col card" style="margin-left: 15px; margin-right: 15px;">
+        <div class="card-body">
+            <div class="card-hader">
+                <h3 class="mb-0">סימון חלוקה <i class="fas fa fa-check-square-o fa-lg"></i></h3>
+            </div>
+            <br/>
+<div >
+<p-listbox *ngIf="addressNotDiv" [options]="addressNotDiv" (onChange)="change()" [(ngModel)]="checkAdd" [metaKeySelection]="false" [checkbox]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'200px' } ">
+    <ng-template let-address pTemplate="item" >
+       
+        <div   class="address-item" >
+            <div>{{address.address}}</div>
+        </div>
+    </ng-template>
+ 
+</p-listbox>
+</div>
+<br/>
+<button type="button"  style="color:#000000; border-color: black;"  class=" btn-lg btn mb-1 btn-rounded " (click)="check()"> חולק <i class="fas fa fa-check-square-o fa-lg"></i></button>
+
+
+</div>
+
+<div class="row">
+<div calss="card " style="width: 80%;margin-top: 20px;">
+    <div class="card-body">
+        <div class="card-hader">
+            <h3 class="mb-0">מקומות חלוקה  <i class="fas fa fa-map-pin fa-lg"> </i></h3>
+        </div>
+        <br/>
+        <p-listbox [options]="addresses" (onChange)="cangeAddr()" [(ngModel)]="selectedCity" [listStyle]="{'max-height':'200px' } ">
+            <ng-template let-add pTemplate="item">
+                <div class="address-item">
+                    <div>{{add.address}}</div>
+                </div>
+            </ng-template>
+    
+        </p-listbox>
+    
+  
+</div>
+</div>
+
+
+
+
+
+</div>
+</div>
+
+
+<div *ngIf="addressesBit" class="card col-6" style="width: 80%;">
+    
+    <div class="card-body" style="width: 90%; height: 80%;">
+    
+    <bing-map  [addresses]="addresses" [addressesBit]="addressesBit"   [centerlat]="centerlat" [Zoom]="Zoom"  [centerlong]="centerlong" *ngIf="displayMapDialog">
+    </bing-map>
+  
+</div>
+
+
+</div>
+    <p-sidebar   [(visible)]="visible" [baseZIndex]="10000" position="left" (onClose)="close()"  (onShow)="openM()">
+        <div class="row" *ngIf="selectedM">
+            <div  class="col-2">
+                <span class="activity active" style="color:black;"></span>
+                <img class=" rounded-circle " [src]="'assets/images/'+ selectedM._id +'.jpg'" height="40px" width="40px" />
+            </div>
+            <div class="col">
+                <h2>{{selectedM.firstName}}</h2>
+            </div>
+            
+        </div>
+
+        <div  >
+            <br/>
+       <div  *ngIf="selectedM" class="scrolling-box" >
+      <div *ngFor="let message of chatMessages" class="message" style="padding:1em;line-height:1.5">          
+            <app-message [message]="message"></app-message>
+      </div>
+    </div>
+    </div>
+    
+        <div  *ngIf="selectedM" class="messages-create-message">
+            <textarea class="messages-create-message__input"
+            [(ngModel)]="text2"
+            (keyup.enter)="sendMessage()"></textarea>
+            <button class="messages-create-message__send" (click)="sendMessage()">שליחת הודעה</button>
+        </div>
+
+
+
+
+
+        <p-listbox   [options]="management">
+            <ng-template let-m pTemplate="gridItem" class="row">
+                <button   pButton (click)="selectUserForChat(m)"  class="p-button-outlined" style="color:#babdbb; size: 20px; width: 100%;"  icon="pi pi-comments" >
+                   
+                   
+                    {{m.firstName}}</button>
+                    
+                 <p-badge *ngIf="countMessage && countMessage[m._id]>0 "  severity="success" [value]="countMessage[m._id]"></p-badge>
+                    
+                    
+            </ng-template>
+        </p-listbox>
+
+        <br/><br/>
+      
+     
+        
+   </p-sidebar>
+
+
+

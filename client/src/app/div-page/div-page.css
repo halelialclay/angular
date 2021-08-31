@@ -1,0 +1,13 @@
+.message{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .message{
+    display:inline-block;
+    clear: both;
+    padding: 20px;
+    border-radius: 30px;
+    margin-bottom: 2px;
+    font-family: Helvetica, Arial, sans-serif;
+  }

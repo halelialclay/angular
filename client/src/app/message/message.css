@@ -1,0 +1,48 @@
+
+  
+   li{
+    display:inline-block;
+    clear: both;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 2px;
+    border-color: black;
+
+    
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+  }
+  
+  .him{
+    background: rgb(246, 255, 146);
+    color: rgb(0, 0, 0);
+
+    float: left;
+  }
+  
+  .me{
+    float: right;
+    background: #b0b8ff;
+    color: rgb(0, 0, 0);
+  }
+  
+  .him + .me{
+    border-bottom-right-radius: 3px;
+  }
+  .him + .him{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+  
+  .me + .me{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+  
+  .me:last-of-type {
+    border-bottom-right-radius: 2px;
+  }
+  .him:last-of-type {
+    border-bottom-left-radius: 2px;
+  }

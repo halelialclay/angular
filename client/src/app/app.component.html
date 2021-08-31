@@ -1,0 +1,101 @@
+<p-toast></p-toast>
+
+<div class="nav-header">
+  <div class="brand-logo">
+    <a [routerLink]="['/']">
+          
+          
+      </a>
+  </div>
+</div>
+
+<div class="header">    
+  <div class="header-content clearfix">
+      <div class="header-left">
+       
+          <div class="input-group icons">
+            <a href="https://www.instagram.com/pitchonlev/" style="background-image:linear-gradient(230deg, #e046ff,#ff8eb4,#ff3232,#ff3232, #ff7300); color: rgb(255, 255, 255);border-radius:8px ;" class="fas fa fa-instagram fa-3x"></a>     
+      <a href="https://www.facebook.com/pitchonlev/" style="color: rgb(17, 0, 255); border-color: black;" class="fas fa fa-facebook-square fa-3x"></a>     
+      <a href="https://www.youtube.com/watch?v=_3sqF2X7EdM/" style="color: rgb(255, 0, 0); border-color: black;" class="fas fa fa-youtube-play fa-3x"></a>     
+      
+            <button type="button" *ngIf="login.isLoggedIn" (click)="logout()" class="btn mb-1 btn-outline-dark">התנתק</button>
+          </div>
+      </div>
+      <div class="header-right">
+          <ul class="clearfix">
+              
+              <li class="icons dropdown" *ngIf="login.isLoggedIn">
+                <h2 class="mb-1">שלום, {{login.loggedInUser.firstName}}</h2>
+
+              </li>
+              <li class="icons dropdown" *ngIf="login.isLoggedIn">
+                <div class="user-img c-pointer position-relative">
+                    <span class="activity active" style="color:black;"></span>
+                    <img [src]="'assets/images/'+ login.loggedInUser._id +'.jpg'" alt="">
+                </div>
+            </li>
+          </ul>
+      </div>
+  </div>
+</div>
+
+<div  *ngIf="login.loggedInUser" class="nk-sidebar">           
+  <div class="nk-nav-scroll">
+      <ul class="metismenu" id="menu" *ngIf="login.loggedInUser && login.loggedInUser.role===roles.Manager">
+          <li class="nav-label">
+            <a class="nav-link" [routerLink]="['/addressList']">
+              <i class="fa fa-map-o  menu-icon"></i><span class="nav-text">רשימת כתובות</span>
+            </a>
+          </li>
+          <li class="nav-label">
+            <a class="nav-link" [routerLink]="['/settInIsrael']">
+              <i class="fa fa-map-marker  menu-icon"></i><span class="nav-text">עריכת חלוקה</span>
+            </a>
+          </li>
+          <li class="nav-label">
+            <a class="nav-link" [routerLink]="['/dividers']">
+              <i class="fa fa-address-card-o  menu-icon"></i><span class="nav-text">רשימת מחלקים</span>
+            </a>
+          </li>
+          <li class="nav-label">
+            <a class="nav-link" [routerLink]="['/blog']">
+              <i class="fa fa-edit  menu-icon"></i><span class="nav-text">עריכת בלוג</span>
+            </a>
+          </li>
+          <li class="nav-label">
+            <a class="nav-link" [routerLink]="['/viewblog']">
+              <i class="fa fa-file-text-o  menu-icon"></i><span class="nav-text">בלוג</span>
+            </a>
+          </li>
+          <li class="nav-label">
+            <a class="nav-link" [routerLink]="['/statistics']">
+              <i class="fa fa-bar-chart-o  menu-icon"></i><span class="nav-text">דוחות</span>
+            </a>
+          </li>
+      </ul>
+      <ul class="metismenu" id="menu" *ngIf="login.loggedInUser && login.loggedInUser.role===roles.Divider">
+        <li class="nav-label">
+          <a class="nav-link" [routerLink]="['/divPage']">
+            <i class="fa fa-home  menu-icon"></i><span class="nav-text">עמוד ראשי</span>
+          </a>
+        </li>
+        <li class="nav-label">
+          <a class="nav-link" [routerLink]="['/viewblog']">
+            <i class="fa fa-file-text-o  menu-icon"></i><span class="nav-text">בלוג</span>
+          </a>
+        </li>
+    </ul>
+  </div>
+</div>
+
+<div class="content-body">
+  <router-outlet *ngIf="login.isLoggedIn">
+    
+  </router-outlet>
+  <app-login *ngIf="!login.isLoggedIn"></app-login>
+</div>
+
+
+  
+  
+

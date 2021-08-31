@@ -1,0 +1,22 @@
+<h1 class="mb-0">Blog </h1>
+<br/>
+  <ng-template ngFor let-post [ngForOf]="allViewPost">
+  <div class="card">
+    <div class="card-body">
+        <div class="media media-reply">
+            <img class="mr-3 circle-rounded" [src]="'assets/images/'+ post.userId +'.jpg'" width="50" height="50" alt="Generic placeholder image">
+            <div class="media-body">
+                <div class="d-sm-flex justify-content-between mb-2">
+                  <h3 class="mb-0">{{post.title}}</h3>
+                    <h5 class="mb-sm-0">{{post.writer}} <small class="text-muted ml-3">{{post.publishDate}}</small></h5>
+                  
+                </div>
+            </div>
+        </div>
+        <p [innerHTML]="post.content"></p>
+
+    </div>
+  </div>
+       
+   </ng-template>
+

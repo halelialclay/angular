@@ -1,0 +1,42 @@
+
+
+<div>
+  <div>
+    <h3 class="mb-0">מפת חלוקה <i class="fas fa fa-map fa-lg"></i></h3>
+  </div>
+  <br/>
+<tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #f03939;overflow:hidden">
+</div>
+</div>
+</td><td class="legendLabel"> מקומות חלוקה </td></tr> 
+<div style="height: 500px; padding-top:10px;">
+<tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px">
+  <div style="width:4px;height:0;border:5px solid #178337;overflow:hidden"></div></div></td><td class="legendLabel">מקומות שחולקו </td></tr> 
+<div style="height: 500px; padding-top:10px;">
+
+
+  <x-map  #xmap [Options]="_options" [Zoom]="Zoom"  [Latitude]="centerlat" [Longitude]="centerlong" 
+  >
+    <x-map-marker  *ngFor="let addr of addresses; index as i;" 
+                  [Latitude]="addr.latitude"
+                  [Longitude]="addr.longitude"
+                  [Title]="addr.address"
+                  [IconInfo]="{
+                    markerType: _markerTypeId.FontMarker,
+                    fontName: 'FontAwesome',
+                    fontSize: 48,
+                    color: addressesBit[i]==1 ?'green':'red',
+                    markerOffsetRatio: { x: 0.5, y: 1 },
+                    text: '\uF041'
+                }"
+
+           #marker>
+
+    </x-map-marker>
+  </x-map>
+
+</div>
+</div>
+
+</div>
+<br/>

@@ -1,0 +1,35 @@
+<h1 class="mb-0">דוחות </h1>
+<br/>
+
+<div >
+       <button  type="button"   class="btn-lg btn mb-1 btn-secondary fa fa-bar-chart   menu-icon" (click)="day()"> יומי </button>
+       <button  type="button"     class="btn-lg btn mb-1 btn-success fa fa-pie-chart  menu-icon" (click)="week()"> שבועי </button>
+      <button type="button" class="btn-lg btn mb-1 btn-info fa fa-codiepie menu-icon" (click)="month()"> חודשי </button>
+    
+</div>
+<br/>
+<div [style]="{'width': '90%' }"  *ngIf="Bday" class="card" >
+    <div class="card-body">
+    <h5>חתך יומי</h5>
+    <p-chart [style]="{'width': '90%' }" type="bar" [data]="dayData" > </p-chart>
+</div>
+</div>
+<div [style]="{'width': '90%' }" *ngIf="Bweek" class="card">
+    <div class="card-body" [style]="{'height': '60%','width': '60%' }">
+    <h5>חתך שבועי</h5>
+<p-chart [style]="{'width': '90%' }" type="pie" [data]="weekData"  ></p-chart>
+</div>
+</div>
+
+<div [style]="{'width': '90%' }" *ngIf="Bmonth" class="card">
+    <div class="card-body" [style]="{'height': '60%','width': '60%' }">
+    <h5>חתך חודשי</h5>
+    <p-chart [style]="{'width': '20%' }" type="polarArea" [data]="monthData"   ></p-chart>
+    </div>
+
+</div>
+
+
+
+
+

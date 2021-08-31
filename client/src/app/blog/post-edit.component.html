@@ -1,0 +1,32 @@
+<div style="width: 800px;" class="card">
+  <div class="card-body" *ngIf="post">
+    <div >
+      כותרת:<br />
+      <input type="text" [(ngModel)]="post.title" />
+    </div>
+    <div >
+      תוכן:<br />
+      <ckeditor [config]="config" [editor]="Editor" [(ngModel)]="post.content"></ckeditor>
+    </div>
+
+    <div >
+      תאריך פירסום:<br />
+      <!--<input type="date" [(ngModel)]="post.publishDate" />-->
+      {{post.publishDate | date:'yyyy-LL-dd'}}
+      <input type="date" [value]="post.publishDate | date:'yyyy-LL-dd'">
+      <!-- (input)="post.publishDate = $event.target.valueAsDate"-->
+    </div>
+
+    <div >
+      פירסום:<br />
+      <input type="checkbox" [(ngModel)]="post.published" />
+    </div>
+
+    <input type="button" class="btn mb-1 btn-dark" (click)="updatePost()" value="שמירה" />
+    <br />
+    <!--<app-upload [fileName]="post.postId + '.jpg'"></app-upload>-->
+  </div>
+</div>
+
+
+

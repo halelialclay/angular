@@ -1,0 +1,107 @@
+<h1 class="mb-0">רשימת מחלקים </h1>
+<br/>
+
+<div>
+    <div class="p-field p-col-12 p-md-4">
+        <label for="icon">תאריך </label>
+        <p-calendar [(ngModel)]="selectedDate" dataType="string" (onSelect)="dateSelected()" dateFormat="yy-mm-dd" [showIcon]="true" inputId="icon"></p-calendar>
+    </div>
+</div>
+
+
+<p-dialog  [modal]="true" (onHide)="closeUpdate()"  [(visible)]="display" [style]="{width: '100%', 'max-width':'400px','height':'550px'}" >
+ <app-update-divider [userId]="userId" *ngIf="userId">
+
+ </app-update-divider>   
+</p-dialog>
+
+<p-dialog [modal]="true"  (onHide)="clouse()" (onShow)="showd()"  [(visible)]="displayMapDialog" [style]="{width: '100%', 'max-width':'650px','height':'650px'}" [baseZIndex]="10000">
+    <bing-map [addresses]="address" [addressesBit]="addressBit"     [centerlat]="centerlat" [Zoom]="Zoom" [centerlong]="centerlong" *ngIf="displayMapDialog"></bing-map>
+    <p-listbox [options]="address" (onChange)="cangeAddr()" [(ngModel)]="selectedCity">
+        <ng-template let-add pTemplate="item">
+            <div class="address-item">
+                <div>{{add.address}}</div>
+            </div>
+        </ng-template>
+
+    </p-listbox>
+
+  </p-dialog>
+
+  <p-dialog *ngIf="user" [modal]="true"  (onHide)="clouseMessage()" (onShow)="showd()"  [(visible)]="displayChat" [style]="{width: '100%', 'max-width':'400px','height':'550px'}" [baseZIndex]="10000">
+      <div class="row">
+        <div class="col-2">
+            <span class="activity active" style="color:black;"></span>
+            <img class=" rounded-circle " [src]="'assets/images/'+ user._id +'.jpg'" height="40px" width="40px" />
+        </div>
+        <div class="col">
+            <h2 class="mb-0">{{user.firstName}}</h2>
+        </div>
+        
+    </div>
+    <div>
+        <br/>
+       
+   <div class="scrolling-box" >
+    
+  <div *ngFor="let message of massages" class="message" style="padding:1em;line-height:1.5">          
+        <app-message [message]="message"></app-message>
+  </div>
+
+</div>
+</div>
+
+    <div class="messages-create-message">
+        <textarea class="messages-create-message__input"
+        [(ngModel)]="text2"
+        (keyup.enter)="sendMessage()"></textarea>
+        <button class="messages-create-message__send" (click)="sendMessage()">שליחת הודעה</button>
+    </div>
+
+
+  </p-dialog>
+
+
+  
+
+<div class="row" >
+    <ng-template ngFor let-divider [ngForOf]="users"   pTemplate="gridItem" class="row">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body" >
+                <div class="text-center">
+                    <img class=" rounded-circle mt-4 " [src]="'assets/images/'+ divider._id +'.jpg'" height="80px" width="80px" />
+                   
+                    <h4 class="card-widget__title text-dark mt-3 ">{{divider.firstName}} {{divider.lastName}}</h4>
+                    <p class="text-muted">{{divider.userName}}</p>
+                    <a class="btn gradient-4 btn-lg border-0 btn-rounded px-5  btn-dark fa fa-user-circle-o menu-icon " href="javascript:void()">  מתנדב  </a>
+                </div>
+            </div>
+            <div class="card-footer border-0 bg-transparent">
+                <div class="row">
+                    <div class="col-4 border-right-1 pt-3">
+                        <a class="text-center d-block text-muted" href="javascript:void()">
+                            <button pButton pRipple style="color:#ff659b"  icon="pi pi-sort-alt" class="p-button-outlined p-button-rounded" (click)="openUpdate(divider._id)"></button>
+                            <p class="">עדכון</p>
+                        </a>
+                    </div>
+                    <div class="col-4 border-right-1 pt-3"><a class="text-center d-block text-muted" href="javascript:void()">
+                        <button pButton pRipple style="color:#7575fc" icon="pi pi-map-marker" class="p-button-outlined p-button-rounded" (click)="openMap(divider._id)"></button>
+                            <p class="">מפה</p>
+                        </a>
+                    </div>
+                    <div class="col-4 border-right-1 pt-3"><a class="text-center d-block text-muted" href="javascript:void()">
+                        <span *ngIf="  countMessage && countMessage[divider._id]>0 " class="badge gradient-1 badge-pill badge-primary">{{countMessage[divider._id]}}</span>
+                        
+                        <button pButton pRipple  style="color:#25c963" icon="pi pi-comments" class="p-button-outlined p-button-rounded" (click)="openchat(divider)"></button>
+                            <p class="">צא'ט</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-template>
+   
+</div>
+

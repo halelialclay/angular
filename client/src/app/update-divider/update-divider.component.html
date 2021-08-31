@@ -1,0 +1,46 @@
+
+
+
+<div *ngIf="curUser" class="container">
+    <h3>
+        עדכון {{curUser.firstName}}
+    </h3>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" [ngClass]="{'submitted':submitted}" >
+    <div class="row">
+        <div class="col-6">
+            <label for="firstName">איש קשר</label><br />
+            
+            <input  style="width: 200%;" name="firstName" #firstName="ngModel" id="firstName" class="form-control input-rounded" [(ngModel)]="curUser.firstName" maxlength="50" reguired/>
+            
+            <span *ngIf="firstName.invalid && firstName.errors.required && (form.submitted || firstName.touched)" 
+            class="error">חסר שם פרטי
+            </span>
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="col-6">
+          <label for="phone">טלפון</label><br />
+          <input  style="width: 200%;"  name="phone" #phone="ngModel" id="phone" class="form-control input-rounded" [(ngModel)]="curUser.phone" maxlength="50" mfaKeyCheck keyPattern="phone"   />
+         
+          <span *ngIf="!phone.valid" class="error">
+            מספר טלפון לא תקין
+          </span>
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-6">
+          <label for="userName">דוא"ל</label><br />
+          <input  style="width: 200%;" type="email" #email="ngModel" name="email" class="form-control input-rounded" pInputText id="email" [(ngModel)]="curUser.userName" maxlength="50"  />
+          <span *ngIf="!email.valid" class="error">
+            דוא"ל לא תקין
+          </span>
+     </div>
+    </div>
+    <br/>
+    <button onclick="" class="btn mb-1 btn-outline-dark ng-star-inserted" >עדכון</button>
+</form>
+</div>
+
+

@@ -1,0 +1,10 @@
+{
+  "/api/*": {
+    "target": "http://localhost:3000/",
+    "secure": false
+  },
+  "/Locations/*": {
+    "target": "https://dev.virtualearth.net/REST/v1/",
+    "secure": false
+  } 
+}

@@ -1,0 +1,43 @@
+<div style="width: 800px;" class="card">
+<div class="row card-body">
+  <div class="card-title">
+        <h4>עריכת בלוגים</h4>
+    </div>
+   
+  <table  class="table">
+    <tr>
+      <th>כותרת</th>
+      <th>תאריך פירסום</th>
+      <th>מפורסם</th>
+      <th></th>
+    </tr>
+    <tr *ngIf="posts==null || posts.length==0">
+      <td colspan="3">לא נמצאו פוסטים</td>
+    </tr>
+    <tr *ngFor="let post of posts">
+      <td>
+        {{post.title}}
+      </td>
+      <td style="text-align:center">
+         {{post.publishDate | date:'dd/LL/yyyy'}}
+      </td>
+      <td>
+         {{(post.published)?"V":"X"}}
+       
+
+      </td>
+      <td>
+        <input type="button" class="btn mb-1 btn-dark btn-sm" value="עדכון" (click)="update(post)" />
+      </td>
+    </tr>
+  </table>
+
+<div class="row card-body">
+  <br />
+   <input type="button" class="btn mb-1 btn-dark" value="הוספה" (click)="addPost()"/>
+  <br />
+  <br />
+</div>
+
+</div>
+</div>

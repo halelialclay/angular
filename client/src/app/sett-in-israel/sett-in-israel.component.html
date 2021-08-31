@@ -1,0 +1,117 @@
+<h1 class="mb-0">ניהול חלוקה</h1>
+<br/>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row"   >
+
+            <div class="col">
+                <h5 class="mb-0"> תאריך:</h5>
+            </div>
+            <div class="col">
+                <h5 class="mb-0"> עיר:</h5>
+            </div>
+            <div class="col">
+                <h5 class="mb-0"> </h5>
+            </div>
+        
+        </div>  
+            <br/>     
+ <div class="row"   >
+    <div class="col">
+        <p-calendar   [(ngModel)]="selectedDate" dataType="string" (onSelect)="dateSelected()" dateFormat="yy-mm-dd" [showIcon]="true" inputId="icon"></p-calendar>
+    </div>
+
+<div class="col">
+    <p-dropdown [options]="sett" [style]="{'minWidth':'50%'}" [(ngModel)]="selectedsett" [virtualScroll]="true" [itemSize]="31" [filter]="true" (onChange)="setChanged()" optionLabel="name" optionValue="_id" placeholder="שם ישוב"></p-dropdown>    
+</div>
+<div class="col">
+    <button class="btn mb-1 btn-dark" type="button" (click)="save()">שמירה</button>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="card">
+    
+    <div class="card-body">
+        <div class="row"   >
+
+            <div class="col">
+                <h5 class="mb-0"> בחירת מחלקים:</h5>
+            </div> 
+            <div class="col">
+                <h5 class="mb-0">בחירת כתובות לחלוקה:</h5>
+            </div>
+            <div class="col">
+                <h5 class="mb-0"></h5>
+            </div>
+
+        </div>  
+            <br/>         
+
+<div class="container" *ngIf="this.data && this.data._id">
+    <div class="row">
+        
+    <div class="col">
+ 
+        <p-listbox [options]="dividers" [(ngModel)]="checkDiv" [metaKeySelection]="false" [checkbox]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+
+            <ng-template let-divider pTemplate="item">
+
+                <div  class="container" class="divider-item">
+                    <div class="row">
+                    
+                    <div  class="col">{{divider.firstName}}</div>
+                    <div class="col">
+                        <img  [src]="'assets/images/'+ divider._id +'.jpg'" width="30%"/>
+                    </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-listbox>
+
+    </div>
+    <div class="col">
+        <p-listbox [options]="addresses" [(ngModel)]="checkAdd"  [metaKeySelection]="false" [checkbox]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+            <ng-template let-address pTemplate="item">
+                <div class="address-item">
+                    <div>{{address.address}}</div>
+                </div>
+            </ng-template>
+        </p-listbox>
+        
+    </div>
+    <div  class="col">
+        <button class="btn mb-1 btn-dark" type="button" (click)="saveDivByDate()">שמירה</button>
+    </div>
+    </div>
+    
+ </div>
+</div>
+    
+</div>
+
+<div *ngIf="isSaveAddress" class="card" >
+    <div class="card-header">
+        <h3>כתובות לחלוקה בתאריך: {{selectedDate}}</h3>
+    </div>
+    <div class="card-body" *ngFor="let jjj of saveAddressInDb">
+        
+        <div class="row"   >
+
+            <div class="col">
+               <h4 class="mb-0">{{jjj.firstName}}</h4>
+                <div class="row" *ngFor="let HHH of jjj.addressName">
+                    <h5 class="mb-0">{{HHH}}</h5>
+                   
+
+                </div>
+                
+
+               
+                </div>
+                </div>
+                </div>
+            </div>
