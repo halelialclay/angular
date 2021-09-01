@@ -23,11 +23,15 @@ export class SettInIsraelListService {
     //data.date = data.date.toJSON()//.substring(0,23);
     return this.http.post<any>(`/api/SettFromeDate`, data);
   }
+
   getAddresses(data:String){
     return this.http.get<Address[]>(`/api/address?settId=${data}`);
-
   }
 
+  getDateDividers(date:String, settId:string){
+    return this.http.get<any[]>(`api/divByDate/date/${date}/${settId}`);
+  }
+ 
   newAddress(newAdd){
     return this.http.post<boolean>(`/api/address`,newAdd);
   }

@@ -7,7 +7,7 @@ const { listenerCount } = require('../models/divByDate.js');
 var settAndDate=require("../models/settAndDate.js");
 
 router.post('/', function(req, res, next) {
-   console.log(req.body)
+   //console.log(req.body)
    try{
    var data=req.body;
    var addresses=data.addresses;
@@ -20,8 +20,8 @@ router.post('/', function(req, res, next) {
       vectors[i] = [addresses[i].latitude , addresses[i].longitude];
       
   }
-  if(addresses.length>users.length){
 
+  if(addresses.length>=users.length){
    kmeans.clusterize(vectors,{k: users.length }, (err,result) => {
       if (err){
          console.log(err)
@@ -102,4 +102,22 @@ else{
       console.log(e)
    }
 });
+
+router.get('/date/:date/:settId', function(req, res, next){
+   console.log(req.params.date);
+   console.log(req.params.settId);
+   
+   divByDate.find({date:req.params.date, settId:Mongoose.Types.ObjectId(req.params.settId)}, function(err, result) {
+      if (err) {
+        console.log(err);
+      }
+       else {
+         res.send(result);
+      }
+   });
+
+   
+   
+});
+
 module.exports = router;

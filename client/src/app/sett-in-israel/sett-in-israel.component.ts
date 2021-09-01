@@ -58,10 +58,9 @@ export class SettInIsraelComponent implements OnInit {
           this.selectedsett = null;
         }
         else{
-         
           this.data = d;
           this.selectedsett = this.data.settId;
-          this.setChanged();        
+          this.setChanged();
         }
       })
   }
@@ -69,8 +68,29 @@ export class SettInIsraelComponent implements OnInit {
   dateSelected(){
     this.setChanged()    
     this.getDataForDate(this.selectedDate)
-
   }
+
+  getDateDividers(){
+    this.SettInIsrael.getDateDividers(this.data.date, this.data.settId)
+      .subscribe(div=>
+        {
+          let uid = div.map(u=>u.userId)
+          let aid = this.flat(div.map(u=>u.addresses));
+          
+          this.checkDiv = this.dividers.filter(f=>uid.indexOf(f._id) >= 0 );
+          this.checkAdd = this.addresses.filter(f=>aid.indexOf(f._id) >= 0 );
+        })    
+  }
+
+  flat(val){
+    return val.flat()
+  }
+
+  selectUsersById(userIds:User[]){
+      this.checkDiv = userIds;
+  }
+
+
 
   save(){
     
@@ -103,6 +123,7 @@ export class SettInIsraelComponent implements OnInit {
     addresses:this.checkAdd,
     users:this.checkDiv
   }
+
     this.SettInIsrael.saveDivByDate(divByDate) .subscribe(t=>{
     if(t.length==0){
       this.messageService.add({severity:'error', summary:'ERROR', detail:'לא ניתן לשבץ יותר מחלקים מכתובות'})
@@ -120,6 +141,9 @@ export class SettInIsraelComponent implements OnInit {
   setChanged(){
     this.isSaveAddress=false;
     this.SettInIsrael.getAddresses(this.selectedsett)
-    .subscribe(addr=>this.addresses=addr)    
+    .subscribe(addr=>{
+      this.addresses=addr
+      this.getDateDividers();
+    })    
   }
 }
